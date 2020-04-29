@@ -17,6 +17,7 @@ import {
 	SpacerInline,
 	Title,
 	Icon,
+	DropdownInput
 } from '@elements';
 import useGlobal from '@state';
 import * as colors from '@util/colors';
@@ -137,12 +138,8 @@ export default () => {
 						style={{ width: '40%' }}
 						autoCapitalize="words"
 					/>
-					<FormTextInput
-						label="State"
-						value={state}
-						setValue={() => { }}
-						style={{ width: '15%' }}
-						autoCapitalize="words"
+					<DropdownInput
+					
 					/>
 					<FormTextInput
 						label="Zip"
