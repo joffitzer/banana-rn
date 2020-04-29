@@ -22,7 +22,7 @@ interface DropdownInputProps {
 
 	label: string;
 
-	data?: Array<string>;
+	data?: [];
 
 	style?: StyleProp<ViewStyle>;
 }
@@ -32,7 +32,7 @@ export const DropdownInput = ({
 			setValue,
 			label,
 			// style,
-			// data
+			data
 		}: DropdownInputProps) => {
 
 			const [isPickerOpen, setIsPickerOpen] = useState(false)
@@ -46,7 +46,7 @@ export const DropdownInput = ({
 				setIsPickerOpen(!isPickerOpen)
 			}
 
-			let testData = ['WA', 'NY', 'NJ']
+			// let testData = ['WA', 'NY', 'NJ']
 	
 			return (
 				<View>
@@ -64,12 +64,12 @@ export const DropdownInput = ({
 										itemStyle={styles.pickerItemStyle}
 										selectedValue={value}
 										onValueChange={handleOnValueChange}>
-											{testData.map(st => {
-												return <Picker.Item label={st} value={st} />
-											})}
-											{/* {{data}.map(st => {
+											{/* {testData.map(st => {
 												return <Picker.Item label={st} value={st} />
 											})} */}
+											{data && data.map(st => {
+												return <Picker.Item label={st} value={st} />
+											})}
 									</Picker>
 							</View>
 						}

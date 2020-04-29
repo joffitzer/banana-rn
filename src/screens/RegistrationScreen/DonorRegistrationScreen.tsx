@@ -41,6 +41,8 @@ export default () => {
 	const [ termsOfService, setTermsOfService ] = useState(false);
 	const [ zip, setZip ] = useState('');
 
+	const statesArray = ['WA', 'NY', 'NJ']
+
 	const toggleTermsOfService = () => setTermsOfService(!termsOfService);
 
 	const validateAndSubmit = async () => {
@@ -142,7 +144,7 @@ export default () => {
 						label="State"
 						value={state}
 						setValue={_setState}
-						// data={statesArray}
+						data={statesArray}
 						style={{ width: '100%'}}
 					/>
 					<FormTextInput
