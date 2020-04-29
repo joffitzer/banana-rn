@@ -8,17 +8,19 @@ const INPUT_HEIGHT = 48;
 export default StyleSheet.create({
 	dropdown: {
 		...typography.body1,
-		width: 100,
-		top: -36,
+		width: '100%',
 		height: INPUT_HEIGHT,
-		marginTop: 5,
-		paddingBottom: 5,
+		marginBottom: 5,
 		paddingHorizontal: INPUT_PADDING_HORIZONTAL,
-		paddingVertical: 5,
+		paddingVertical: 13,
 		backgroundColor: colors.LIGHT_YELLOW,
 		borderWidth: 2,
 		borderStyle: 'solid',
 		// Transparent border to prevent box-size adjustments when error border is revealed.
-		borderColor: 'transparent'
+		borderColor: 'transparent',
+	},
+	picker: {
+		bottom: 96,
+		height: 44
 	}
 });

@@ -139,7 +139,10 @@ export default () => {
 						autoCapitalize="words"
 					/>
 					<DropdownInput
-					
+						label="State"
+						value={state}
+						setValue={_setState}
+						// data={statesArray}
 					/>
 					<FormTextInput
 						label="Zip"

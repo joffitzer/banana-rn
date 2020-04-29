@@ -1,40 +1,46 @@
-import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import React from 'react';
+import { 
+	View, 
+	Picker, 
+	TextInputProps 
+} from 'react-native';
+import {
+	InputLabel
+} from '@elements';
 import styles from './DropdownInput.styles';
-import { DropdownLabel } from './DropdownLabel'
-import { Dropdown } from 'react-native-material-dropdown'
+
+interface DropdownInputProps {
+	value: TextInputProps['value'];
+
+	setValue: TextInputProps['onChangeText'];
+
+	label: string;
+
+	data?: Array<String>;
+}
 
 export const DropdownInput = ({
-			// style,
-			// value,
-			// setValue,
-			// inputStyle,
-			// forwardedRef,
-			// editable = true,
-			// ...props
-		}) => {
+			value,
+			setValue,
+			label,
+			// data
+		}: DropdownInputProps) => {
 
-			let data = [{
-				value: 'WA'
-			}, {
-				value: 'NY'
-			}, {
-				value: 'NJ'
-			}]
-
+			let testData = ['WA', 'NY', 'NJ']
 	
 			return (
 				<View>
-					<DropdownLabel
-					text='state'
-					/>
-					<Dropdown 
-						data={data}
-						style={styles.dropdown}
-						inputContainerStyle={{ borderBottomColor: 'transparent' }}
-						// renderAccessory={()=> null}
-					/>
+					<InputLabel text={label} />
+					<View style={styles.dropdown}>
+						<Picker
+							style={styles.picker}
+							selectedValue={value}
+							onValueChange={setValue}>
+								{testData.map(st => {
+									return <Picker.Item label={st} value={st} />
+								})}
+						</Picker>
+					</View>
 				</View>
 			)
-
 }
