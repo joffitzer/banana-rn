@@ -20,7 +20,11 @@ export default StyleSheet.create({
 		borderColor: 'transparent',
 	},
 	picker: {
-		bottom: 96,
-		height: 44
+		height: 88,
+		bottom: 33
+	},
+	pickerItemStyle: {
+		color: colors.NAVY_BLUE,
+		height: 88
 	}
 });

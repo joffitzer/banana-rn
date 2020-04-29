@@ -2,7 +2,7 @@ import React from 'react';
 import { 
 	View, 
 	Picker, 
-	TextInputProps 
+	TextInputProps
 } from 'react-native';
 import {
 	InputLabel
@@ -17,12 +17,16 @@ interface DropdownInputProps {
 	label: string;
 
 	data?: Array<String>;
+
+	style?: object;
+
 }
 
 export const DropdownInput = ({
 			value,
 			setValue,
 			label,
+			// style,
 			// data
 		}: DropdownInputProps) => {
 
@@ -34,6 +38,7 @@ export const DropdownInput = ({
 					<View style={styles.dropdown}>
 						<Picker
 							style={styles.picker}
+							itemStyle={styles.pickerItemStyle}
 							selectedValue={value}
 							onValueChange={setValue}>
 								{testData.map(st => {

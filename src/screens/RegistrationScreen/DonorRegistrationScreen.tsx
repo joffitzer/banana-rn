@@ -143,6 +143,7 @@ export default () => {
 						value={state}
 						setValue={_setState}
 						// data={statesArray}
+						style={{ width: '100%'}}
 					/>
 					<FormTextInput
 						label="Zip"
