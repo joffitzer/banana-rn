@@ -44,6 +44,9 @@ export const DropdownInput = ({
 								{testData.map(st => {
 									return <Picker.Item label={st} value={st} />
 								})}
+								{/* {{data}.map(st => {
+									return <Picker.Item label={st} value={st} />
+								})} */}
 						</Picker>
 					</View>
 				</View>
