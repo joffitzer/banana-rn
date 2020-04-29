@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {
+	useState
+} from 'react';
 import { 
 	View, 
+	Text,
 	Picker, 
-	TextInputProps
+	PickerProps,
+	StyleProp,
+	ViewStyle,
+	TouchableWithoutFeedback
 } from 'react-native';
 import {
 	InputLabel
@@ -10,16 +16,15 @@ import {
 import styles from './DropdownInput.styles';
 
 interface DropdownInputProps {
-	value: TextInputProps['value'];
+	value: PickerProps['selectedValue'];
 
-	setValue: TextInputProps['onChangeText'];
+	setValue: Function;
 
 	label: string;
 
-	data?: Array<String>;
+	data?: Array<string>;
 
-	style?: object;
-
+	style?: StyleProp<ViewStyle>;
 }
 
 export const DropdownInput = ({
@@ -30,25 +35,44 @@ export const DropdownInput = ({
 			// data
 		}: DropdownInputProps) => {
 
+			const [isPickerOpen, setIsPickerOpen] = useState(false)
+
+			const handleOnValueChange = (itemValue, itemIndex) => {
+				setValue(itemValue)
+				setIsPickerOpen(!isPickerOpen)
+			}
+
+			const handlePress = () => {
+				setIsPickerOpen(!isPickerOpen)
+			}
+
 			let testData = ['WA', 'NY', 'NJ']
 	
 			return (
 				<View>
 					<InputLabel text={label} />
-					<View style={styles.dropdown}>
-						<Picker
-							style={styles.picker}
-							itemStyle={styles.pickerItemStyle}
-							selectedValue={value}
-							onValueChange={setValue}>
-								{testData.map(st => {
-									return <Picker.Item label={st} value={st} />
-								})}
-								{/* {{data}.map(st => {
-									return <Picker.Item label={st} value={st} />
-								})} */}
-						</Picker>
-					</View>
+						<View style={styles.dropdownInput}>
+							<TouchableWithoutFeedback onPress={handlePress}>
+								<Text style={styles.textColor}>{value}</Text>
+							</TouchableWithoutFeedback>
+						</View>
+						{
+							isPickerOpen && 
+								<View>
+									<Picker
+										style={styles.picker}
+										itemStyle={styles.pickerItemStyle}
+										selectedValue={value}
+										onValueChange={handleOnValueChange}>
+											{testData.map(st => {
+												return <Picker.Item label={st} value={st} />
+											})}
+											{/* {{data}.map(st => {
+												return <Picker.Item label={st} value={st} />
+											})} */}
+									</Picker>
+							</View>
+						}
 				</View>
 			)
 }

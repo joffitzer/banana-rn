@@ -6,7 +6,7 @@ const INPUT_PADDING_HORIZONTAL = 10;
 const INPUT_HEIGHT = 48;
 
 export default StyleSheet.create({
-	dropdown: {
+	dropdownInput: {
 		...typography.body1,
 		width: '100%',
 		height: INPUT_HEIGHT,
@@ -21,10 +21,16 @@ export default StyleSheet.create({
 	},
 	picker: {
 		height: 88,
-		bottom: 33
+		// bottom: 33,
+		backgroundColor: colors.LIGHT_YELLOW,
+		width: '100%',
+		flex: 1
 	},
 	pickerItemStyle: {
 		color: colors.NAVY_BLUE,
-		height: 88
+		height: 88,
+	},
+	textColor: {
+		color: colors.NAVY_BLUE
 	}
 });
