@@ -20,17 +20,17 @@ export default StyleSheet.create({
 		borderColor: 'transparent',
 	},
 	picker: {
-		height: 88,
+		// height: 88,
 		// bottom: 33,
-		backgroundColor: colors.LIGHT_YELLOW,
-		width: '100%',
-		flex: 1
+		// backgroundColor: colors.LIGHT_YELLOW,
+		// width: '100%',
+		// flex: 1,
 	},
 	pickerItemStyle: {
 		color: colors.NAVY_BLUE,
-		height: 88,
+		// height: 88,
 	},
 	textColor: {
-		color: colors.NAVY_BLUE
-	}
+		color: colors.NAVY_BLUE,
+	},
 });
