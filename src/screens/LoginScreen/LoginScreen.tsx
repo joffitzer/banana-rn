@@ -13,8 +13,10 @@ import {
 	Title,
 	LinkButton,
 	FormTextInput,
+	DropdownInput,
 } from '@elements';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-navigation';
 import styles from './LoginScreen.styles';
 
 export default () => {
@@ -50,63 +52,36 @@ export default () => {
 
 	const handleForgotPassword = () => { console.log('Handle forgot password.'); };
 
+	const [ val, setVal ] = useState();
+
+	const data = [
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+	];
+
 	return (
-		<KeyboardAvoidingView style={styles.outerContainer} behavior="padding">
-			<View style={styles.header}>
-				{/* TODO: use ContentHeader component when available */}
-				<Title text={`banana \n${userIdentity}`} />
-			</View>
-
-			<ScrollView style={styles.bodyContainer} contentContainerStyle={styles.bodyContentContainer}>
-				<View
-					style={styles.form}
+		<SafeAreaView>
+			<KeyboardAvoidingView style={styles.outerContainer} behavior="padding">
+				<View style={{
+					position: 'relative',
+					justifyContent: 'center',
+					alignItems: 'center',
+				}}
 				>
-					<FormTextInput
-						label="email"
-						placeholder="info@bananaapp.org"
-						value={email}
-						setValue={setEmail}
-						style={styles.inputEmail}
-						onSubmitEditing={handleEmailInputSubmit}
-						autoCorrect={false}
-						enablesReturnKeyAutomatically={true}
-						autoCompleteType="username"
-						textContentType="username"
-						keyboardType="email-address"
-						returnKeyType="next"
-						blurOnSubmit={true} // Necessary to prevent focus from 'flickering'
+					<DropdownInput
+						label="test"
+						value={val || data[0]}
+						setValue={setVal}
+						data={data}
+						style={{
+							width: '30%',
+						}}
 					/>
-
-					<FormTextInput
-						label="password"
-						type="password"
-						value={password}
-						setValue={setPassword}
-						ref={passwordInputRef}
-						onSubmitEditing={handleLogin}
-						enablesReturnKeyAutomatically={true}
-						autoCompleteType="password"
-						returnKeyType="go"
-						blurOnSubmit={false}
-					/>
-
-					<View style={styles.forgotPassword}>
-						{/* View wrapper required to constrain clickable area of button */}
-						<TouchableWithoutFeedback
-							onPress={handleForgotPassword}
-						>
-							<Text style={styles.forgotPasswordText}>
-								Forgot Password?
-							</Text>
-						</TouchableWithoutFeedback>
-					</View>
 				</View>
-
-				<View style={styles.buttonContainer}>
-					<LinkButton text="Log In" onPress={handleLogin} />
-					<LinkButton text="Register" destination="RegistrationScreen" />
-				</View>
-			</ScrollView>
-		</KeyboardAvoidingView>
+			</KeyboardAvoidingView>
+		</SafeAreaView>
 	);
 };

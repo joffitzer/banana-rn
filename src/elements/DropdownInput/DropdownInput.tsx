@@ -1,18 +1,21 @@
 import React, {
-	useState
+	useState,
 } from 'react';
-import { 
-	View, 
+import {
+	View,
 	Text,
-	Picker, 
+	Picker,
 	PickerProps,
 	StyleProp,
 	ViewStyle,
-	TouchableWithoutFeedback
+	TouchableWithoutFeedback,
+	Modal,
 } from 'react-native';
 import {
-	InputLabel
+	InputLabel,
+	Icon,
 } from '@elements';
+import { LIGHT_YELLOW } from '@util/colors';
 import styles from './DropdownInput.styles';
 
 interface DropdownInputProps {
@@ -22,57 +25,93 @@ interface DropdownInputProps {
 
 	label: string;
 
-	data?: [];
+	data?: Array<string>; // data is required
 
 	style?: StyleProp<ViewStyle>;
 }
 
 export const DropdownInput = ({
-			value,
-			setValue,
-			label,
-			// style,
-			data
-		}: DropdownInputProps) => {
+	value,
+	setValue,
+	label,
+	style,
+	data,
+}: DropdownInputProps) => {
+	const [ isPickerOpen, setIsPickerOpen ] = useState(false);
 
-			const [isPickerOpen, setIsPickerOpen] = useState(false)
+	const handleOnValueChange = (itemValue, itemIndex) => {
+		setValue(itemValue);
+	};
 
-			const handleOnValueChange = (itemValue, itemIndex) => {
-				setValue(itemValue)
-				setIsPickerOpen(!isPickerOpen)
-			}
+	const handlePress = () => {
+		setIsPickerOpen(!isPickerOpen);
+	};
 
-			const handlePress = () => {
-				setIsPickerOpen(!isPickerOpen)
-			}
+	return (
+		<View style={style}>
+			<InputLabel text={label} />
 
-			// let testData = ['WA', 'NY', 'NJ']
-	
-			return (
-				<View>
-					<InputLabel text={label} />
-						<View style={styles.dropdownInput}>
-							<TouchableWithoutFeedback onPress={handlePress}>
-								<Text style={styles.textColor}>{value}</Text>
-							</TouchableWithoutFeedback>
-						</View>
-						{
-							isPickerOpen && 
-								<View>
-									<Picker
-										style={styles.picker}
-										itemStyle={styles.pickerItemStyle}
-										selectedValue={value}
-										onValueChange={handleOnValueChange}>
-											{/* {testData.map(st => {
-												return <Picker.Item label={st} value={st} />
-											})} */}
-											{data && data.map(st => {
-												return <Picker.Item label={st} value={st} />
-											})}
-									</Picker>
-							</View>
-						}
+			<TouchableWithoutFeedback onPress={handlePress}>
+				<View style={[
+					styles.dropdownInput,
+					{
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+					},
+				]}
+				>
+					<Text style={styles.textColor}>{value}</Text>
+
+					<Icon name="dropdown" size={18} />
 				</View>
-			)
-}
+			</TouchableWithoutFeedback>
+
+
+			<Modal
+				visible={isPickerOpen}
+				transparent={true}
+				onRequestClose={() => setIsPickerOpen(false)}
+			>
+				<View
+					style={{
+						flex: 1,
+					}}
+				>
+					<TouchableWithoutFeedback
+						onPress={() => { setIsPickerOpen(false); }}
+					>
+						<View
+							style={{
+								flex: 1,
+							}}
+						/>
+					</TouchableWithoutFeedback>
+
+					<View
+						style={{
+							// flex: 1,
+							width: '100%',
+							backgroundColor: LIGHT_YELLOW,
+							position: 'absolute',
+							bottom: 0,
+						}}
+					>
+						<Picker
+							style={[
+								styles.picker,
+								{
+								// height: 300,
+								},
+							]}
+							itemStyle={styles.pickerItemStyle}
+							selectedValue={value}
+							onValueChange={handleOnValueChange}
+						>
+							{data && data.map(st => <Picker.Item color="NAVY_BLUE" label={st} value={st} />)}
+						</Picker>
+					</View>
+				</View>
+			</Modal>
+		</View>
+	);
+};
